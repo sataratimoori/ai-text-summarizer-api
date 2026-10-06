@@ -4,7 +4,7 @@
 
 // ⚠️ For a local/student project only.
 // Do NOT publish your real API key to GitHub.
-const GEMINI_API_KEY = "AQ.Ab8RN6K56SrXg_5AYyrJKj5Cpja4J0DgacpWeBlatuifoQR16Q";
+const GEMINI_API_KEY = "AQ.Ab8RN6KkZHS6WY4jC1DZfe6aObCz2MUdMybdarMxj1p7E7V0aw";
 
 const MODEL = "gemini-3.5-flash-lite";
 
