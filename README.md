@@ -58,12 +58,12 @@ Users can enter their text into the chatbot interface, and the application proce
 
 ### Landing Page
 
-![Landing Page](assets/screenshots/landing-page.png)
+![Landing Page](assets/screenshots/AI-Summarizer-10-06-2026_10_45_PM.png)
 
 
 ### Chat UI
 
-![Chat UI](assets/screenshots/chat-ui.png)
+![Chat UI](assets/screenshots/AI-Summarizer-10-06-2026_10_45_PM%20(1).png)
 
 ## 🔗 Project Links
 
