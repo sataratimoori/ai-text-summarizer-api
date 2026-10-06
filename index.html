@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Summarizer</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F7CF53' stroke-width='2' stroke-linejoin='round'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dark-theme">
+
+    <!-- Canvas layer for background neural net particles -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Navbar Header Section -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-wrapper">
+                <svg class="logo-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+                <span class="logo-text">AI Summarizer</span>
+            </div>
+
+            <!-- Added Responsive Menu Wrapper -->
+            <div class="nav-menu-wrapper" id="navMenu">
+                <ul class="nav-links-list">
+                    <li><a href="#services" class="menu-link">Services</a></li>
+                    <li><a href="#about" class="menu-link">About Core</a></li>
+                    <li><a href="#assistant-terminal" class="menu-link chat-trigger-link">AI Assistant</a></li>
+                    <li><a href="bot.html" class="menu-link main-robot-btn">Launch App</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <button id="theme-toggle-btn" class="nav-theme-circle-btn" aria-label="Toggle Theme">
+                    <span class="theme-btn-icon"></span>
+                </button>
+                <!-- Hamburger Icon for Mobile Layout -->
+                <button class="hamburger-toggle" id="hamburgerBtn" aria-label="Toggle Menu">
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Intelligent Text Summarization for <br><span id="dynamic-text"
+                    class="typed-text"></span></h1>
+            <p class="hero-subtitle">Simplify your reading workflow. Turn long articles, essays, and documents into
+                clear, concise keypoints instantly.</p>
+            <div class="cta-wrapper">
+                <button class="primary-btn" id="cta-btn">
+                    <span>Try For Free Now</span>
+                    <svg class="btn-arrow-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Counter Section -->
+    <section class="counter-section">
+        <div class="container stats-grid">
+            <div class="stat-card">
+                <h3 class="stat-number" data-target="150">0</h3>
+                <p class="stat-label">Active Users (K+)</p>
+            </div>
+            <div class="stat-card">
+                <h3 class="stat-number" data-target="120">0</h3>
+                <p class="stat-label">Documents Processed (M+)</p>
+            </div>
+            <div class="stat-card">
+                <h3 class="stat-number" data-target="99">0</h3>
+                <p class="stat-label">Accuracy Rate (%)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2 class="section-title">Interactive Services</h2>
+            <div class="services-grid">
+                <div class="service-card reveal-node js-tilt-card">
+                    <div class="service-icon-wrapper icon-orange-bg">
+                        <svg class="service-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                    </div>
+                    <h4>Standard Summary</h4>
+                    <p>Get a well-balanced summary preserving the original context and core flow of any document.</p>
+                </div>
+                <div class="service-card reveal-node js-tilt-card">
+                    <div class="service-icon-wrapper icon-teal-bg">
+                        <svg class="service-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="6"></circle>
+                            <circle cx="12" cy="12" r="1"></circle>
+                        </svg>
+                    </div>
+                    <h4>Keypoints Extraction</h4>
+                    <p>Instantly pull out crucial statements, core arguments, and factual metrics as highlights.</p>
+                </div>
+                <div class="service-card reveal-node js-tilt-card">
+                    <div class="service-icon-wrapper icon-gold-bg">
+                        <svg class="service-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                    </div>
+                    <h4>Bullet Point Lists</h4>
+                    <p>Convert cluttered pages into clean, highly readable, and perfectly structured lists.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section with Tabs -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">Explore Project Core</h2>
+            <div class="interactive-about-tabs reveal-node">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="mission">Our Mission</button>
+                    <button class="tab-btn" data-tab="tech">Technology Stack</button>
+                    <button class="tab-btn" data-tab="team">Development Team</button>
+                </div>
+                <div class="tab-content-panel active" id="mission">
+                    <p>Our AI Text Summarizer eliminates information overload. Built using advanced structures, it helps
+                        grasp the absolute essence of long contents without reading filler words.</p>
+                </div>
+                <div class="tab-content-panel" id="tech">
+                    <p>Engineered using pure reactive JavaScript DOM rendering models, hardware-accelerated Canvas
+                        matrices, semantic HTML5 layouts, and modern asynchronous API architectures.</p>
+                </div>
+                <div class="tab-content-panel" id="team">
+                    <p>
+                        <strong>Elham:</strong> UI/UX Premium Design, Color Palette & Styling Concept |
+                        <strong>Satara:</strong> Git Management & Chat UI Architecture |
+                        <strong>Samira & Samaneh:</strong> Core JavaScript Engine & DOM Mechanics |
+                        <strong>Mina:</strong> Asynchronous Core API Integration & QA Bug Fixing
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conversational Assistant Terminal -->
+    <section id="assistant-terminal" class="report-section">
+        <div class="container report-box reveal-node">
+            <h2 class="section-title">Interactive Bug Reporter</h2>
+            <p class="report-sub">Simulate an immediate interaction with our automated troubleshooting system terminal.
+            </p>
+
+            <div class="interactive-assistant-card">
+                <div class="assistant-chat-window" id="chat-window">
+                    <div class="chat-bubble assistant-bubble">Hello! I am your automated QA log assistant. What issue
+                        did you run into?</div>
+                </div>
+                <div class="assistant-input-area">
+                    <input type="text" id="assistant-input"
+                        placeholder="Type your issue code here (e.g. API crash, broken layout)...">
+                    <button id="assistant-send-btn">Send</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- Footer -->
+    <footer class="team-footer">
+        <div class="container">
+            <p>&copy; 2026 AI Summarizer Platform. All Rights Reserved.</p>
+        </div>
+    </footer>
+    </footer>
+
+    <div id="theme-toast" class="toast">Changing system layout environment...</div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
