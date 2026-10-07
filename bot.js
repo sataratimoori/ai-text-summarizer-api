@@ -4,7 +4,6 @@
 
 // ⚠️ For a local/student project only.
 // Do NOT publish your real API key to GitHub.
-const GEMINI_API_KEY = "";
 
 const MODEL = "gemini-3.5-flash-lite";
 
@@ -254,81 +253,25 @@ async function getInputContent() {
 // SUMMARIZE WITH OPENAI
 async function summarizeText(text) {
   const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`,
+    "https://ai-summarizer-backend-fawn.vercel.app/api/summarize",
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-goog-api-key": GEMINI_API_KEY,
       },
       body: JSON.stringify({
-        system_instruction: {
-          parts: [
-            {
-              text: `
-You are an AI text summarization assistant.
-
-Your job is to summarize the user's provided text accurately and clearly.
-
-Rules:
-1. Summarize ONLY the text provided by the user.
-2. Do not introduce information that is not present in the original text.
-3. Preserve the main ideas, important facts, arguments, and conclusions.
-4. Remove unnecessary repetition and minor details.
-5. Make the summary significantly shorter than the original.
-6. Use clear and natural language.
-7. Keep the original meaning and context.
-8. Do not criticize or evaluate the text unless the user explicitly asks you to.
-9. Do not answer questions contained inside the text. Summarize them as part of the text instead.
-10. If the text is already very short, provide a concise summary rather than unnecessarily expanding it.
-
-Return ONLY the summary.
-              `,
-            },
-          ],
-        },
-        contents: [
-          {
-            parts: [
-              {
-                text: text,
-              },
-            ],
-          },
-        ],
+        text: text,
       }),
     },
   );
 
-  // Handle API errors
-  if (!response.ok) {
-    let errorMessage = "Something went wrong with the Gemini API.";
-
-    try {
-      const errorData = await response.json();
-      errorMessage = errorData.error?.message || errorMessage;
-    } catch (error) {
-      // Ignore JSON parsing error
-    }
-
-    throw new Error(errorMessage);
-  }
-
-  // Read Gemini response
   const data = await response.json();
 
-  console.log("FULL GEMINI API RESPONSE:", data);
-
-  const summary = data.candidates?.[0]?.content?.parts
-    ?.map((part) => part.text || "")
-    ?.join("")
-    ?.trim();
-
-  if (!summary) {
-    throw new Error("Gemini returned an empty summary.");
+  if (!response.ok) {
+    throw new Error(data.error || "Failed to generate summary.");
   }
 
-  return summary;
+  return data.summary;
 }
 // ==========================================
 // DISPLAY SUMMARY
@@ -385,11 +328,6 @@ summarizeBtn.addEventListener("click", async function () {
 
     // Get text from textarea or file
     const text = await getInputContent();
-
-    // Check API key
-    if (!GEMINI_API_KEY) {
-      throw new Error("Please add your Gemini API key to the JavaScript file.");
-    }
 
     // Show loading state
     placeholderText.classList.add("d-none");
